@@ -2229,6 +2229,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dbab929fa844f540b8b5113af365ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joystick: {fileID: 0}
+  moveSpeed: 20
+  cameraController: {fileID: 0}
+  turnSpeed: 20
 --- !u!143 &4583481810621063154
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2240,13 +2244,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 1.8
   m_Radius: 0.35
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.91, z: 0}
 --- !u!1 &1291569366300325771
 GameObject:
   m_ObjectHideFlags: 0
