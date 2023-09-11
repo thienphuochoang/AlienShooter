@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1007596344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1007596345}
+  - component: {fileID: 1007596346}
+  m_Layer: 0
+  m_Name: RifleAttachSlot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1007596345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007596344}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1295335294646590789}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1007596346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007596344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59cda03042e5a44468357e7687fc337e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachSlotType: 0
 --- !u!1 &1291133756700341351
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +554,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1295335294646590789}
+  - component: {fileID: 7657403816397377341}
   m_Layer: 0
   m_Name: Hand_R
   m_TagString: Untagged
@@ -531,9 +577,23 @@ Transform:
   - {fileID: 1290200437946093109}
   - {fileID: 1295224689769011687}
   - {fileID: 1294842282681748745}
+  - {fileID: 1007596345}
   m_Father: {fileID: 1295069189355786655}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7657403816397377341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291151990928738379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59cda03042e5a44468357e7687fc337e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachSlotType: 0
 --- !u!1 &1291154896697460621
 GameObject:
   m_ObjectHideFlags: 0
@@ -2143,6 +2203,7 @@ GameObject:
   - component: {fileID: 1205963514519739157}
   - component: {fileID: -25744285136388007}
   - component: {fileID: 4583481810621063154}
+  - component: {fileID: 849472188610751150}
   m_Layer: 0
   m_Name: SM_Chr_Teen_Male_01
   m_TagString: Untagged
@@ -2157,7 +2218,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1291557800960894313}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2206,7 +2267,7 @@ Animator:
   m_GameObject: {fileID: 1291557800960894313}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ffdfcb810f2918b4f8fe9f917f07bc78, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b1025235d3cf1e74fb1425fb6e3965fb, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2229,10 +2290,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dbab929fa844f540b8b5113af365ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick: {fileID: 0}
-  moveSpeed: 20
+  fireStick: {fileID: 0}
+  moveStick: {fileID: 0}
+  moveSpeed: 5
   cameraController: {fileID: 0}
-  turnSpeed: 20
+  turnSpeed: 8
 --- !u!143 &4583481810621063154
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2251,6 +2313,23 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.91, z: 0}
+--- !u!114 &849472188610751150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291557800960894313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c794ac5c2dd9d0743a9196629e883ff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialWeaponPrefabs:
+  - {fileID: 4229121203337452483, guid: 608b6d5035fee8b449467322e96c4622, type: 3}
+  defaultWeaponSlot: {fileID: 7657403816397377341}
+  weaponSlots:
+  - {fileID: 1007596346}
 --- !u!1 &1291569366300325771
 GameObject:
   m_ObjectHideFlags: 0

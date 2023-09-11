@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TeenMale_RifleOverrideAnimController
+  m_Controller: {fileID: 9100000, guid: b1025235d3cf1e74fb1425fb6e3965fb, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -203655887218126122, guid: fdc13ff0fb93ca946830a90b76678220,
+      type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 57e50164ba11f61488ff28e4702504f2,
+      type: 3}

@@ -11,6 +11,8 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     private RectTransform backgroundTransform;
     [SerializeField]
     private RectTransform centerTransform;
+    [SerializeField]
+    private GameObject[] stickDirections;
 
     public delegate void OnStickInputValueUpdated(Vector2 inputValue);
     public event OnStickInputValueUpdated onStickValueUpdated;
@@ -21,8 +23,9 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
         Vector2 localOffset =
             Vector2.ClampMagnitude(touchPosition - centerPosition, backgroundTransform.sizeDelta.x / 2);
         thumbStickTransform.position = centerPosition + localOffset;
-        Vector2 inputValue = localOffset / backgroundTransform.sizeDelta.x / 2;
+        Vector2 inputValue = localOffset / (backgroundTransform.sizeDelta.x / 2);
         onStickValueUpdated?.Invoke(inputValue);
+        UpdateStickDirectionVisual(inputValue);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -36,5 +39,61 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
         backgroundTransform.position = centerTransform.position;
         thumbStickTransform.position = backgroundTransform.position;
         onStickValueUpdated?.Invoke(Vector2.zero);
+        DeactivateAllStickDirections();
+    }
+
+    private void UpdateStickDirectionVisual(Vector2 inputValue)
+    {
+        if (   inputValue.x <= 0 
+               && inputValue.x >= -1 
+               && inputValue.y >= 0 
+               && inputValue.y <= 1)
+        {
+            stickDirections[0].SetActive(true);
+            stickDirections[1].SetActive(false);
+            stickDirections[2].SetActive(false);
+            stickDirections[3].SetActive(false);
+        }
+
+        if (   inputValue.x >= 0
+               && inputValue.x <= 1
+               && inputValue.y >= 0
+               && inputValue.y <= 1)
+        {
+            stickDirections[1].SetActive(true);
+            stickDirections[0].SetActive(false);
+            stickDirections[2].SetActive(false);
+            stickDirections[3].SetActive(false);
+        }
+        
+        if (   inputValue.x >= -1 
+               && inputValue.x <= 0 
+               && inputValue.y >= -1 
+               && inputValue.y <= 0)
+        {
+            stickDirections[2].SetActive(true);
+            stickDirections[0].SetActive(false);
+            stickDirections[1].SetActive(false);
+            stickDirections[3].SetActive(false);
+        }
+        
+        if (   inputValue.x >= 0 
+               && inputValue.x <= 1 
+               && inputValue.y >= -1 
+               && inputValue.y <= 0)
+        {
+            stickDirections[3].SetActive(true);
+            stickDirections[0].SetActive(false);
+            stickDirections[1].SetActive(false);
+            stickDirections[2].SetActive(false);
+        }
+    }
+
+    private void DeactivateAllStickDirections()
+    {
+        stickDirections[0].SetActive(false);
+        stickDirections[1].SetActive(false);
+        stickDirections[2].SetActive(false);
+        stickDirections[3].SetActive(false);
     }
 }
