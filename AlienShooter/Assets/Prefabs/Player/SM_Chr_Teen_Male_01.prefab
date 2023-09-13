@@ -45,6 +45,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachSlotType: 0
+--- !u!1 &1965757701
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1965757702}
+  - component: {fileID: 1965757703}
+  m_Layer: 0
+  m_Name: PistolAttachSlot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1965757702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965757701}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1295335294646590789}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1965757703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965757701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59cda03042e5a44468357e7687fc337e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachSlotType: 1
 --- !u!1 &1291133756700341351
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,6 +623,7 @@ Transform:
   - {fileID: 1295224689769011687}
   - {fileID: 1294842282681748745}
   - {fileID: 1007596345}
+  - {fileID: 1965757702}
   m_Father: {fileID: 1295069189355786655}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2327,9 +2373,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialWeaponPrefabs:
   - {fileID: 4229121203337452483, guid: 608b6d5035fee8b449467322e96c4622, type: 3}
+  - {fileID: 1549277485759997814, guid: 7b983020faf0b9f49863e306d64d0803, type: 3}
   defaultWeaponSlot: {fileID: 7657403816397377341}
   weaponSlots:
   - {fileID: 1007596346}
+  - {fileID: 1965757703}
 --- !u!1 &1291569366300325771
 GameObject:
   m_ObjectHideFlags: 0

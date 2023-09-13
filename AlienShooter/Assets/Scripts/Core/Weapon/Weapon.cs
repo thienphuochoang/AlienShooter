@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,16 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] private Types type;
     [SerializeField] private AnimatorOverrideController _overrideController;
     public GameObject owner { get; private set; }
+    protected AimSystem aimSystem;
+    [SerializeField]
+    protected float shootRate = 1;
 
+    protected virtual void Start()
+    {
+        aimSystem = GetComponent<AimSystem>();
+    }
+
+    public abstract void Shoot();
     public void Init(GameObject inputOwner)
     {
         owner = inputOwner;
@@ -26,6 +36,7 @@ public abstract class Weapon : MonoBehaviour
     {
         gameObject.SetActive(true);
         owner.GetComponent<Animator>().runtimeAnimatorController = _overrideController;
+        owner.GetComponent<Animator>().SetFloat("shootRate", shootRate);
     }
 
     public void Unequip()

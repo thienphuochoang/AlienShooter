@@ -15,7 +15,10 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     private GameObject[] stickDirections;
 
     public delegate void OnStickInputValueUpdated(Vector2 inputValue);
+    public delegate void OnStickTaped();
     public event OnStickInputValueUpdated onStickValueUpdated;
+    public event OnStickTaped onStickTaped;
+    private bool wasDragging = false;
     public void OnDrag(PointerEventData eventData)
     {
         Vector2 touchPosition = eventData.position;
@@ -26,12 +29,14 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
         Vector2 inputValue = localOffset / (backgroundTransform.sizeDelta.x / 2);
         onStickValueUpdated?.Invoke(inputValue);
         UpdateStickDirectionVisual(inputValue);
+        wasDragging = true;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         backgroundTransform.position = eventData.position;
         thumbStickTransform.position = eventData.position;
+        wasDragging = false;
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -40,6 +45,10 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
         thumbStickTransform.position = backgroundTransform.position;
         onStickValueUpdated?.Invoke(Vector2.zero);
         DeactivateAllStickDirections();
+        if (!wasDragging)
+        {
+            onStickTaped?.Invoke();
+        }
     }
 
     private void UpdateStickDirectionVisual(Vector2 inputValue)

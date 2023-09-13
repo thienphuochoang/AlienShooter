@@ -249,6 +249,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6236140108932805429
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8497194993075331007}
+  m_Layer: 0
+  m_Name: AimComponent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8497194993075331007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6236140108932805429}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.104, z: 0.7107}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3738336844569212903}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7153095488181485803
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,6 +292,7 @@ GameObject:
   - component: {fileID: 8322194759042424854}
   - component: {fileID: 7412981354789245488}
   - component: {fileID: 4229121203337452483}
+  - component: {fileID: 5312949014988995766}
   m_Layer: 0
   m_Name: SM_Wep_AssaultRifle_03
   m_TagString: Untagged
@@ -284,6 +316,7 @@ Transform:
   - {fileID: 789817596412643498}
   - {fileID: 6109707716374747370}
   - {fileID: 4069045331642895053}
+  - {fileID: 8497194993075331007}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 5.289, y: 49.262, z: -132.97}
@@ -352,6 +385,24 @@ MonoBehaviour:
   type: 0
   _overrideController: {fileID: 22100000, guid: 89eddd749f6db6542991dec10a942002,
     type: 2}
+  shootRate: 1.5
+--- !u!114 &5312949014988995766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153095488181485803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b229c5789608e47b6a3e02fbd6b52b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootPosition: {fileID: 8497194993075331007}
+  shootRange: 1000
+  shootMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &8918322071353457169
 GameObject:
   m_ObjectHideFlags: 0

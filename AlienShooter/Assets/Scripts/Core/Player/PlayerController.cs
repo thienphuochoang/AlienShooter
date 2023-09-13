@@ -21,13 +21,31 @@ public class PlayerController : MonoBehaviour
     private float turnSpeed = 30f;
 
     private Animator _animator;
+    private Inventory _inventory;
     private void Start()
     {
         _mainCamera = Camera.main;
         characterController = GetComponent<CharacterController>();
+        _inventory = GetComponent<Inventory>();
+        _animator = GetComponent<Animator>();
         fireStick.onStickValueUpdated += FireStick_OnStickValueUpdated;
         moveStick.onStickValueUpdated += MoveStick_OnStickValueUpdated;
-        _animator = GetComponent<Animator>();
+        fireStick.onStickTaped += TriggerSwapWeaponAnimation;
+    }
+
+    private void SwapWeapon()
+    {
+        _inventory.NextWeapon();
+    }
+
+    public void ShootPoint()
+    {
+        _inventory.GetActiveWeapon().Shoot();
+    }
+
+    private void TriggerSwapWeaponAnimation()
+    {
+        _animator.SetTrigger("swapWeapon");
     }
 
     private Vector3 StickInputToWorldDirection(Vector2 inputValue)
@@ -81,6 +99,14 @@ public class PlayerController : MonoBehaviour
     private void FireStick_OnStickValueUpdated(Vector2 inputValue)
     {
         _fireInput = inputValue;
+        if (inputValue.magnitude > 0)
+        {
+            _animator.SetBool("isAttacking", true);
+        }
+        else
+        {
+            _animator.SetBool("isAttacking", false);
+        }
     }
 
     private void MoveStick_OnStickValueUpdated(Vector2 inputValue)
