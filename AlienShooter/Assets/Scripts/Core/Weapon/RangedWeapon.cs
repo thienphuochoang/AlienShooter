@@ -5,7 +5,7 @@ using UnityEngine;
 public class RangedWeapon : Weapon
 {
     [SerializeField]
-    protected TrailRenderer bulletTrail;
+    protected ParticleSystem bulletTrail;
     [SerializeField]
     protected Transform bulletSpawnPoint;
     
@@ -15,7 +15,7 @@ public class RangedWeapon : Weapon
     [SerializeField]
     protected int damage = 5;
 
-    protected virtual void GenerateBulletVFX(Vector3 hitPosition)
+    protected virtual void GenerateBulletVFX(Vector3 hitPosition, Vector3 aimDirection)
     {
     }
 
@@ -27,11 +27,11 @@ public class RangedWeapon : Weapon
 
     public override void Shoot()
     {
-        AimSystem.HitInfo hitInfo = aimSystem.GetAimTarget();
+        AimSystem.HitInfo hitInfo = aimSystem.GetAimTarget(out Vector3 aimDirection);
         GameObject target = hitInfo.hitObject;
         if (target != null)
             Damage(target, damage);
-        GenerateBulletVFX(hitInfo.hitPoint);
+        GenerateBulletVFX(hitInfo.hitPoint, aimDirection);
     }
     public override void Equip()
     {

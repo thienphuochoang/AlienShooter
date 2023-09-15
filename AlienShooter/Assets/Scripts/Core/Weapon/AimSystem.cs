@@ -20,11 +20,11 @@ public class AimSystem : MonoBehaviour
             hitPoint = inputHitPoint;
         }
     }
-    public HitInfo GetAimTarget()
+    public HitInfo GetAimTarget(out Vector3 aimDirection)
     {
         Vector3 aimStart = shootPosition.position;
-
-        if (Physics.Raycast(aimStart, GetAimDirection(), out RaycastHit raycastHitInfo, shootRange, shootMask))
+        aimDirection = GetAimDirection();
+        if (Physics.Raycast(aimStart, aimDirection, out RaycastHit raycastHitInfo, shootRange, shootMask))
         {
             HitInfo hitInfo = new HitInfo(raycastHitInfo.collider.gameObject, raycastHitInfo.point);
             return hitInfo;

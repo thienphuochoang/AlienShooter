@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Rifle : RangedWeapon
 {
-    protected override void GenerateBulletVFX(Vector3 hitPosition)
+    protected override void GenerateBulletVFX(Vector3 hitPosition, Vector3 aimDirection)
     {
-        base.GenerateBulletVFX(hitPosition);
-        TrailRenderer trail = Instantiate(bulletTrail, bulletSpawnPoint.position, Quaternion.identity);
-        //StartCoroutine(SpawnTrail(trail, hitPosition))
+        base.GenerateBulletVFX(hitPosition, aimDirection);
+        bulletTrail.transform.rotation = Quaternion.LookRotation(aimDirection);
+        bulletTrail.Emit(bulletTrail.emission.GetBurst(0).maxCount);
     }
 }
