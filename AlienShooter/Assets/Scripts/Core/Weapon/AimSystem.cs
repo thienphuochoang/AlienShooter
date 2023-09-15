@@ -9,17 +9,28 @@ public class AimSystem : MonoBehaviour
     [SerializeField] private float shootRange = 1000f;
     [SerializeField] private LayerMask shootMask;
 
-    public GameObject GetAimTarget()
+    public struct HitInfo
+    {
+        public GameObject hitObject;
+        public Vector3 hitPoint;
+
+        public HitInfo(GameObject inputHitObject, Vector3 inputHitPoint)
+        {
+            hitObject = inputHitObject;
+            hitPoint = inputHitPoint;
+        }
+    }
+    public HitInfo GetAimTarget()
     {
         Vector3 aimStart = shootPosition.position;
-        Vector3 aimDirection = shootPosition.forward;
 
-        if (Physics.Raycast(aimStart, GetAimDirection(), out RaycastHit hitInfo, shootRange, shootMask))
+        if (Physics.Raycast(aimStart, GetAimDirection(), out RaycastHit raycastHitInfo, shootRange, shootMask))
         {
-            return hitInfo.collider.gameObject;
+            HitInfo hitInfo = new HitInfo(raycastHitInfo.collider.gameObject, raycastHitInfo.point);
+            return hitInfo;
         }
 
-        return null;
+        return new HitInfo(null, Vector3.positiveInfinity);
     }
 
     private void OnDrawGizmos()

@@ -385,7 +385,11 @@ MonoBehaviour:
   type: 0
   _overrideController: {fileID: 22100000, guid: 89eddd749f6db6542991dec10a942002,
     type: 2}
+  bulletTrail: {fileID: 9168432853720712103, guid: 8c666b1b4331593468cbe539ecaf48e1,
+    type: 3}
+  bulletSpawnPoint: {fileID: 8497194993075331007}
   shootRate: 1.5
+  damage: 5
 --- !u!114 &5312949014988995766
 MonoBehaviour:
   m_ObjectHideFlags: 0

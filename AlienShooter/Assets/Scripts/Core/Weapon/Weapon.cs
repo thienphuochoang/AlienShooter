@@ -13,13 +13,11 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] private Types type;
     [SerializeField] private AnimatorOverrideController _overrideController;
     public GameObject owner { get; private set; }
-    protected AimSystem aimSystem;
-    [SerializeField]
-    protected float shootRate = 1;
+
 
     protected virtual void Start()
     {
-        aimSystem = GetComponent<AimSystem>();
+        
     }
 
     public abstract void Shoot();
@@ -32,15 +30,23 @@ public abstract class Weapon : MonoBehaviour
     public Types GetWeaponType() => type;
         
 
-    public void Equip()
+    public virtual void Equip()
     {
         gameObject.SetActive(true);
         owner.GetComponent<Animator>().runtimeAnimatorController = _overrideController;
-        owner.GetComponent<Animator>().SetFloat("shootRate", shootRate);
     }
 
     public void Unequip()
     {
         gameObject.SetActive(false);
+    }
+
+    protected void Damage(GameObject objToDamage, int damage)
+    {
+        HealthSystem healthSystem = objToDamage.GetComponent<HealthSystem>();
+        if (healthSystem != null)
+        {
+            healthSystem.ChangeHealth(-damage);
+        }
     }
 }

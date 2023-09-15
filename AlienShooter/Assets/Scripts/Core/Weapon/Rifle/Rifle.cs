@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rifle : Weapon
+public class Rifle : RangedWeapon
 {
-    public override void Shoot()
+    protected override void GenerateBulletVFX(Vector3 hitPosition)
     {
-        GameObject target = aimSystem.GetAimTarget();
-        Debug.Log(target.name);
+        base.GenerateBulletVFX(hitPosition);
+        TrailRenderer trail = Instantiate(bulletTrail, bulletSpawnPoint.position, Quaternion.identity);
+        //StartCoroutine(SpawnTrail(trail, hitPosition))
     }
 }

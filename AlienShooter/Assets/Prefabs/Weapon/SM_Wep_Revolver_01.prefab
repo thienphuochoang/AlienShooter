@@ -188,7 +188,8 @@ MonoBehaviour:
   type: 1
   _overrideController: {fileID: 22100000, guid: 1b2ffa784830ff54794adbabd815fbb8,
     type: 2}
-  shootRate: 2
+  shootRate: 1.5
+  damage: 20
 --- !u!114 &3217702821139805669
 MonoBehaviour:
   m_ObjectHideFlags: 0
