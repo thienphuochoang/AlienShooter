@@ -46,7 +46,7 @@ public abstract class Weapon : MonoBehaviour
         HealthSystem healthSystem = objToDamage.GetComponent<HealthSystem>();
         if (healthSystem != null)
         {
-            healthSystem.ChangeHealth(-damage);
+            healthSystem.ChangeHealth(-damage, owner);
         }
     }
 }

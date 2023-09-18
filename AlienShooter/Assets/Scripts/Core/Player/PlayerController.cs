@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
         
         _animator.SetFloat("forwardSpeed", forward);
         _animator.SetFloat("rightSpeed", right);
+        characterController.Move(Vector3.down * (Time.deltaTime * 10f));
     }
 
     private void UpdateCamera()

@@ -20,10 +20,10 @@ public class HealthBarUI : MonoBehaviour
         _healthSystem = GetComponentInParent<HealthSystem>();
         _healthSystem.onDamaged += UpdateFillHPBar;
         _healthSystem.onDead += DisableHealthBarUI;
-        UpdateFillHPBar(0);
+        UpdateFillHPBar(0, null);
     }
 
-    private void UpdateFillHPBar(float amountOfDamage)
+    private void UpdateFillHPBar(float amountOfDamage, GameObject attacker)
     {
         _fillBar.value = _healthSystem.GetHealthNormalized();
     }

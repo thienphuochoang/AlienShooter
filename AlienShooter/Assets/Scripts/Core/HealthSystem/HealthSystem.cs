@@ -7,10 +7,10 @@ public class HealthSystem : MonoBehaviour
     private float health;
     [SerializeField] private float maxHealth = 100;
 
-    public delegate void OnHealthChanged(float amountOfHealth);
+    public delegate void OnHealthChanged(float amountOfHealth, GameObject attacker);
     public event OnHealthChanged onHealthChanged;
     
-    public delegate void OnDamaged(float amountOfDamage);
+    public delegate void OnDamaged(float amountOfDamage, GameObject attacker);
     public event OnDamaged onDamaged;
     
     public delegate void OnDead();
@@ -21,13 +21,13 @@ public class HealthSystem : MonoBehaviour
         health = maxHealth;
     }
 
-    public void ChangeHealth(float amountOfHealth)
+    public void ChangeHealth(float amountOfHealth, GameObject attacker)
     {
         if (amountOfHealth == 0 || health == 0) return;
         health += amountOfHealth;
         if (amountOfHealth < 0)
-            onDamaged?.Invoke(amountOfHealth);
-        onHealthChanged?.Invoke(amountOfHealth);
+            onDamaged?.Invoke(amountOfHealth, attacker);
+        onHealthChanged?.Invoke(amountOfHealth, attacker);
 
         if (health <= 0)
         {
