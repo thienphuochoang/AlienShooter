@@ -8,9 +8,24 @@ public enum NodeResult
     Success,
     InProgress
 }
+
 public abstract class BTreeNode
 {
     private bool hasStarted = false;
+    private int priority;
+
+    public virtual void SortPriority(ref int priorityRef)
+    {
+        priority = priorityRef++;
+        Debug.Log(this + " has priority: " + priority);
+    }
+
+    public int GetPriority() => priority;
+
+    public virtual BTreeNode Get()
+    {
+        return this;
+    }
 
     public NodeResult UpdateNode()
     {
@@ -47,6 +62,11 @@ public abstract class BTreeNode
     protected virtual void End()
     {
         
+    }
+
+    public void Abort()
+    {
+        EndNode();
     }
     protected virtual NodeResult Execute()
     {

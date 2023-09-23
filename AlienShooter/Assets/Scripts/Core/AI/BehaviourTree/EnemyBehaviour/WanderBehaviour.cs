@@ -8,19 +8,13 @@ using Random = UnityEngine.Random;
 public class WanderBehaviour : MonoBehaviour
 {
     public float wanderRadius = 10f; // Radius within which the zombie will wander.
-    public float wanderTimer = 5f;   // Time in seconds before the zombie picks a new destination.
-
-    private Transform target;
-    private NavMeshAgent agent;
-    private float timer;
-
-    private void Start()
+    /*private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        timer = wanderTimer;
-    }
+        timer = 0f;
+    }*/
 
-    private void Update()
+    /*private void Update()
     {
         timer += Time.deltaTime;
 
@@ -30,10 +24,10 @@ public class WanderBehaviour : MonoBehaviour
             agent.SetDestination(newPos);
             timer = 0;
         }
-    }
+    }*/
 
     // Generate a random point within a sphere for wandering.
-    private Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
+    private Vector3 RandomWanderingLocation(Vector3 origin, float dist, int layermask)
     {
         Vector3 randDirection = Random.insideUnitSphere * dist;
         randDirection += origin;
@@ -42,6 +36,12 @@ public class WanderBehaviour : MonoBehaviour
         NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
 
         return navHit.position;
+    }
+
+    public bool GetNextWanderingLocation(out Vector3 point)
+    {
+        point = RandomWanderingLocation(transform.position, wanderRadius, -1);
+        return true;
     }
 
     private void OnDrawGizmos()

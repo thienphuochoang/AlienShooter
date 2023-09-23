@@ -10,6 +10,7 @@ public class BTreeTask_MoveToTarget : BTreeNode
     private GameObject _target;
     private float _distance;
     private BehaviourTree _behaviourTree;
+    private IBehaviourTree _behaviourTreeInterface;
 
     public BTreeTask_MoveToTarget(BehaviourTree inputBehaviourTree, string inputTargetKey, float inputDistance)
     {
@@ -17,6 +18,7 @@ public class BTreeTask_MoveToTarget : BTreeNode
         this._behaviourTree = inputBehaviourTree;
         this._distance = inputDistance;
         _navMeshAgent = this._behaviourTree.GetComponent<NavMeshAgent>();
+        _behaviourTreeInterface = _behaviourTree.GetBehaviourTreeInterface();
     }
 
     protected override NodeResult Execute()
@@ -33,7 +35,9 @@ public class BTreeTask_MoveToTarget : BTreeNode
 
         blackboard.onBlackboardValueChange += Blackboard_OnBlackboardValueChange;
         _navMeshAgent.SetDestination(_target.transform.position);
+        _navMeshAgent.speed = 2f;
         _navMeshAgent.isStopped = false;
+        _behaviourTreeInterface.TriggerRunAnimation();
         return NodeResult.InProgress;
     }
 
@@ -66,5 +70,14 @@ public class BTreeTask_MoveToTarget : BTreeNode
     private bool IsTargetInDistance()
     {
         return Vector3.Distance(_target.transform.position, _behaviourTree.transform.position) <= _distance;
+    }
+
+    protected override void End()
+    {
+        _navMeshAgent.isStopped = true;
+        _navMeshAgent.speed = 0.5f;
+        _behaviourTreeInterface.CancelRunAnimation();
+        _behaviourTree.Blackboard.onBlackboardValueChange -= Blackboard_OnBlackboardValueChange;
+        base.End();
     }
 }

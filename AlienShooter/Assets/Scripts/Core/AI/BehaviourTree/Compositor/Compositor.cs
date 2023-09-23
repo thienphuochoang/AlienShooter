@@ -32,8 +32,35 @@ public class Compositor : BTreeNode
 
     protected override void End()
     {
+        if (currentChild == null) return;
+        currentChild.Value.Abort();
         currentChild = null;
     }
 
+    public override void SortPriority(ref int priorityRef)
+    {
+        base.SortPriority(ref priorityRef);
+        foreach (var child in children)
+        {
+            child.SortPriority(ref priorityRef);
+        }
+    }
+
     protected BTreeNode GetCurrentChild() => currentChild.Value;
+    public override BTreeNode Get()
+    {
+        if (currentChild == null)
+        {
+            if (children.Count != 0)
+            {
+                return children.First.Value.Get();
+            }
+            else
+            {
+                return this;
+            }
+        }
+
+        return currentChild.Value.Get();
+    }
 }

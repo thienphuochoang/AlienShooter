@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, ITeam
 {
     [SerializeField]
     private Joystick fireStick;
@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     private CameraController cameraController;
     [SerializeField]
     private float turnSpeed = 30f;
+
+    [SerializeField] private int teamID = 1;
+    public int GetTeamID() => teamID;
 
     private Animator _animator;
     private Inventory _inventory;
