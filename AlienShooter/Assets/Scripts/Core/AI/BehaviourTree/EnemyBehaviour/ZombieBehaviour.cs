@@ -6,9 +6,11 @@ public class ZombieBehaviour : BehaviourTree
 {
     protected override void ConstructTree(out BTreeNode rootNode)
     {
-        #region Attack State
         Selector rootSelector = new Selector();
-        Sequencer attackTargetSequencer = new Sequencer();
+        #region Attack State
+
+        BTreeTaskGroup_AttackTarget attackTargetTaskGroup = new BTreeTaskGroup_AttackTarget(this, 1.3f, 10f, 3.5f);
+        /*Sequencer attackTargetSequencer = new Sequencer();
         BTreeTask_MoveToTarget moveToTargetTask = new BTreeTask_MoveToTarget(this, "Target", 1.3f);
         BTreeTask_RotateTowardsTarget rotateTowardsTargetTask = new BTreeTask_RotateTowardsTarget(this, "Target", 10f);
         BTreeTask_Attack attackTask = new BTreeTask_Attack(this, "Target");
@@ -23,11 +25,15 @@ public class ZombieBehaviour : BehaviourTree
             BlackboardDecorator.RunCondition.KeyExist,
             BlackboardDecorator.NotifyRule.RunConditionChange,
             BlackboardDecorator.NotifyAbort.Both);
-        rootSelector.AddChild(attackTargetDecorator);
+        rootSelector.AddChild(attackTargetDecorator);*/
+        rootSelector.AddChild(attackTargetTaskGroup);
         #endregion
 
         #region Check Last Seen Location State
-        Sequencer checkLastSeenSequencer = new Sequencer();
+
+        BTreeTaskGroup_MoveToLastSeenLocation moveToLastSeenLocationTaskGroup =
+            new BTreeTaskGroup_MoveToLastSeenLocation(this, 0.1f, 15f);
+        /*Sequencer checkLastSeenSequencer = new Sequencer();
         BTreeTask_MoveToLocation moveToLastSeenTask = new BTreeTask_MoveToLocation(this, "LastSeenLocation", 0.1f);
         BTreeTask_Wait waitAtLastSeenTask = new BTreeTask_Wait(15f);
         BTreeTask_RemoveBlackboardData removeLastSeenLocationBlackboardDataTask =
@@ -42,11 +48,14 @@ public class ZombieBehaviour : BehaviourTree
             BlackboardDecorator.RunCondition.KeyExist,
             BlackboardDecorator.NotifyRule.RunConditionChange,
             BlackboardDecorator.NotifyAbort.None);
-        rootSelector.AddChild(checkLastSeenLocationDecorator);
+        rootSelector.AddChild(checkLastSeenLocationDecorator);*/
+        rootSelector.AddChild(moveToLastSeenLocationTaskGroup);
         #endregion
         
         #region Wandering State
-        Sequencer wanderingSequencer = new Sequencer();
+
+        BTreeTaskGroup_Wandering wanderingGroupTask = new BTreeTaskGroup_Wandering(this, 0.1f, 10f);
+        /*Sequencer wanderingSequencer = new Sequencer();
         BTreeTask_GetNextWanderingLocation getNextWanderingLocationTask =
             new BTreeTask_GetNextWanderingLocation(this, "WanderPoint");
         BTreeTask_MoveToLocation moveToLocationTask = new BTreeTask_MoveToLocation(this, "WanderPoint", 0.1f);
@@ -54,7 +63,8 @@ public class ZombieBehaviour : BehaviourTree
         wanderingSequencer.AddChild(getNextWanderingLocationTask);
         wanderingSequencer.AddChild(moveToLocationTask);
         wanderingSequencer.AddChild(waitTask);
-        rootSelector.AddChild(wanderingSequencer);
+        rootSelector.AddChild(wanderingSequencer);*/
+        rootSelector.AddChild(wanderingGroupTask);
         #endregion
         
         rootNode = rootSelector;

@@ -20,6 +20,15 @@ public class PlayerController : MonoBehaviour, ITeam
     [SerializeField]
     private float turnSpeed = 30f;
 
+    [Header("Health UI")]
+    [SerializeField] private PlayerHealthBarUI _playerHealthBarUI;
+    private HealthSystem _healthSystem;
+    
+    [Header("Ingame UI")]
+    [SerializeField]
+    private InGameUI inGameUI; 
+    
+    [Header("Team ID")]
     [SerializeField] private int teamID = 1;
     public int GetTeamID() => teamID;
 
@@ -31,9 +40,17 @@ public class PlayerController : MonoBehaviour, ITeam
         characterController = GetComponent<CharacterController>();
         _inventory = GetComponent<Inventory>();
         _animator = GetComponent<Animator>();
+        _healthSystem = GetComponent<HealthSystem>();
         fireStick.onStickValueUpdated += FireStick_OnStickValueUpdated;
         moveStick.onStickValueUpdated += MoveStick_OnStickValueUpdated;
         fireStick.onStickTaped += TriggerSwapWeaponAnimation;
+        _healthSystem.onHealthChanged += HealthSystem_onHealthChanged;
+        _healthSystem.onDead += PlayerOnDead;
+    }
+
+    private void HealthSystem_onHealthChanged(float amountOfHealth, GameObject attacker)
+    {
+        _playerHealthBarUI.UpdateHealth(amountOfHealth, attacker);
     }
 
     private void SwapWeapon()
@@ -49,6 +66,13 @@ public class PlayerController : MonoBehaviour, ITeam
     private void TriggerSwapWeaponAnimation()
     {
         _animator.SetTrigger("swapWeapon");
+    }
+
+    private void PlayerOnDead()
+    {
+        _animator.SetLayerWeight(2,1);
+        _animator.SetTrigger("isDead");
+        inGameUI.SetDisableSticks();
     }
 
     private Vector3 StickInputToWorldDirection(Vector2 inputValue)

@@ -72,4 +72,9 @@ public abstract class BTreeNode
     {
         return NodeResult.Success;
     }
+
+    public virtual void Initialize()
+    {
+        
+    }
 }

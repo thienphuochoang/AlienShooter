@@ -2250,6 +2250,9 @@ GameObject:
   - component: {fileID: -25744285136388007}
   - component: {fileID: 4583481810621063154}
   - component: {fileID: 849472188610751150}
+  - component: {fileID: 5937299645792252719}
+  - component: {fileID: 5174251647321421179}
+  - component: {fileID: 7557737799363637404}
   m_Layer: 0
   m_Name: SM_Chr_Teen_Male_01
   m_TagString: Untagged
@@ -2341,6 +2344,8 @@ MonoBehaviour:
   moveSpeed: 5
   cameraController: {fileID: 0}
   turnSpeed: 8
+  _playerHealthBarUI: {fileID: 0}
+  teamID: 1
 --- !u!143 &4583481810621063154
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2378,6 +2383,51 @@ MonoBehaviour:
   weaponSlots:
   - {fileID: 1007596346}
   - {fileID: 1965757703}
+--- !u!114 &5937299645792252719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291557800960894313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a4094a69cfd394d9e1bc95282a80a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5174251647321421179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291557800960894313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b712a21d5c1b4304794bbacb123726e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 100
+--- !u!114 &7557737799363637404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291557800960894313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5287412b11133ef45ab071209640b16f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshes:
+  - {fileID: 1153076251810698689}
+  - {fileID: 1277381650041277575}
+  - {fileID: 1277989842717196357}
+  _originalMatList: []
+  _hitMat: {fileID: 2100000, guid: 0895823024baec047a34ef6db3ae7063, type: 2}
+  flashDuration: 0.1
 --- !u!1 &1291569366300325771
 GameObject:
   m_ObjectHideFlags: 0

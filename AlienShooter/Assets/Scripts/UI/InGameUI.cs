@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class InGameUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GameObject moveStick;
+    [SerializeField] private GameObject fireStick;
 
-    // Update is called once per frame
-    void Update()
+    public void SetEnableSticks()
     {
-        
+        moveStick.SetActive(true);
+        fireStick.SetActive(true);
+    }
+    public void SetDisableSticks()
+    {
+        moveStick.SetActive(false);
+        fireStick.SetActive(false);
     }
 }

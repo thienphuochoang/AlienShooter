@@ -63,4 +63,13 @@ public class Compositor : BTreeNode
 
         return currentChild.Value.Get();
     }
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        foreach (var child in children)
+        {
+            child.Initialize();
+        }
+    }
 }

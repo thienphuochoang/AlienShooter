@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour, IBehaviourTree, ITeam
     [SerializeField]
     private float turnSpeed = 8f;
 
+    [SerializeField] private TriggerDamageComponent _damageComponent;
+
     [SerializeField] private int teamID = 2;
     public int GetTeamID() => teamID;
     
@@ -24,6 +26,7 @@ public class Enemy : MonoBehaviour, IBehaviourTree, ITeam
         _healthSystem.onDead += HealthSystem_OnDead;
         _healthSystem.onDamaged += HealthSystem_OnDamaged;
         _perceptionComponent.onPerceptionTargetChanged += PerceptionComponent_onPerceptionTargetChanged;
+        _damageComponent.SetTeamInterfaceSource(this);
     }
 
     private void PerceptionComponent_onPerceptionTargetChanged(GameObject target, bool sensed)
@@ -91,7 +94,42 @@ public class Enemy : MonoBehaviour, IBehaviourTree, ITeam
 
     public void Attack(GameObject target)
     {
-        _animator.SetTrigger("Attack");
+        int randomAttackAnimation = UnityEngine.Random.Range(0, 4);
+        switch (randomAttackAnimation)
+        {
+            case 0:
+                _animator.SetTrigger("Attack");
+                break;
+            case 1:
+                _animator.SetTrigger("Attack2");
+                break;
+            case 2:
+                _animator.SetTrigger("Attack3");
+                break;
+            case 3:
+                _animator.SetTrigger("Attack4");
+                break;
+            default:
+                _animator.SetTrigger("Attack");
+                break;
+        }
+        
+    }
+
+    public void AttackPoint()
+    {
+        if (_damageComponent)
+        {
+            _damageComponent.SetDamageEnabled(true);
+        }
+    }
+
+    public void AttackEnd()
+    {
+        if (_damageComponent)
+        {
+            _damageComponent.SetDamageEnabled(false);
+        }
     }
 
     private void RotateTowards(Vector3 aimDirection)
